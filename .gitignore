@@ -1,0 +1,6 @@
+.sass-cache/
+.jekyll-metadata
+Gemfile.lock
+*.gem
+node_modules
+.idea/
