@@ -126,6 +126,7 @@ class Rsvp extends Component {
         {showForm &&
           <div>
             <header className="major">
+              <span className="icon major fa-calendar-o"></span>
               <h2>RSVP</h2>
             </header>
             <p>Let us know if you are coming!</p>

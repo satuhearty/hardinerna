@@ -139,6 +139,10 @@ class App extends Component {
           getTdProps={(state, rowInfo) => {
             return {
               onClick: (e, handleOriginal) => {
+                if (!rowInfo) {
+                  return;
+                }
+
                 this.setState({ currentData: rowInfo.original });
                 this.onOpenModal();
                 if (handleOriginal) {

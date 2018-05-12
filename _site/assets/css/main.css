@@ -1962,7 +1962,7 @@ button,
   .main .container,
   .main .container-secondary {
     padding: 5em 2.5em 8em 2.5em ;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.85);
     box-shadow: inset 0 1px 0 0 #dddddd; }
     .main .container:before,
     .main .container-secondary:before {
@@ -2034,15 +2034,38 @@ button,
       font-weight: 700;
       margin: 1.5em 0 0 0; }
   #header .container {
+    width: 100%;
     bottom: 0;
-    left: 48%;
-    margin-left: -17.5em;
     padding: 2.5em;
     position: absolute; }
     #header .container > :last-child {
       margin-bottom: 0; }
     #header .container .button {
       min-width: 12em; }
+    #header .container .goto-next {
+      -moz-transition: background-color 0.2s ease-in-out;
+      -webkit-transition: background-color 0.2s ease-in-out;
+      -ms-transition: background-color 0.2s ease-in-out;
+      transition: background-color 0.2s ease-in-out;
+      background-color: rgba(144, 144, 144, 0.075);
+      background-image: url("images/arrow.svg");
+      background-position: center center;
+      background-repeat: no-repeat;
+      border-radius: 100%;
+      border: 0;
+      bottom: 3em;
+      display: block;
+      height: 4em;
+      left: 50%;
+      line-height: 4em;
+      margin-left: -2em;
+      overflow: hidden;
+      position: absolute;
+      text-indent: 4em;
+      white-space: nowrap;
+      width: 4em; }
+      #header .container .goto-next:hover {
+        background-color: rgba(144, 144, 144, 0.15); }
 
 /* Footer */
 #footer {
@@ -2240,9 +2263,11 @@ button,
 .input {
   width: 25px;
   height: 25px;
-  background-color: #2C3E50;
+  background-color: #e0b5b5;
   position: relative;
   border-radius: 50%; }
+  .input i {
+    color: #e0b5b5; }
 
 .input:hover {
   cursor: pointer; }
@@ -2254,37 +2279,34 @@ button,
   z-index: -1;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #2C3E50;
+  background-color: #e0b5b5;
   width: 4vw;
   height: 5px;
   max-width: 50px; }
 
 .input::before {
-  left: calc(-4vw + 12.5px); }
+  left: calc(-5vw + 12.5px); }
 
 .input::after {
   right: calc(-4vw + 12.5px); }
 
 .input.active {
-  background-color: #2C3E50; }
-
-.input.active::before {
-  background-color: #2C3E50; }
-
-.input.active::after {
-  background-color: #AEB6BF; }
+  background-color: #E04545; }
+  .input.active i {
+    font-size: 3em;
+    color: #E04545; }
 
 .input.active span {
   font-weight: 700; }
 
 .input.active span::before {
-  font-size: 13px; }
+  font-size: 17px; }
 
 .input.active span::after {
   font-size: 15px; }
 
-.input.active ~ .input, .input.active ~ .input::before, .input.active ~ .input::after {
-  background-color: #AEB6BF; }
+.input {
+  background-color: transparent !important; }
 
 .input span {
   width: 1px;
@@ -2318,7 +2340,7 @@ button,
   width: inherit;
   font-weight: 400;
   font-size: 22px;
-  margin-top: 100px; }
+  margin-top: 40px; }
 
 .description-flex-container p {
   margin-top: 0;
@@ -2329,10 +2351,10 @@ button,
 
 @media (min-width: 1250px) {
   .input::before {
-    left: -37.5px; }
+    left: -36px; }
 
   .input::after {
-    right: -37.5px; } }
+    right: -52px; } }
 @media (max-width: 850px) {
   .input {
     width: 17px;
@@ -2354,8 +2376,7 @@ button,
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    height: auto;
-    margin-top: 15vh; }
+    height: auto; }
 
   .input {
     width: 60px;

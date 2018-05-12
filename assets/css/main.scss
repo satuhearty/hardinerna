@@ -1020,7 +1020,7 @@ button,
 	.container,
 	.container-secondary {
 		@include padding($size-padding-tb, $size-padding-lr, (0, 0, 5em, 0));
-		background: transparentize(_palette(bg), 0.05);
+		background: transparentize(_palette(bg), 0.15);
 		box-shadow: inset 0 1px 0 0 _palette(border);
 
 		&:before {
@@ -1115,10 +1115,11 @@ button,
 	}
 
 	.container {
+		width: 100%;
 		//background: transparentize(_palette(bg), 0.05);
 		bottom: 0;
-		left: 48%;
-		margin-left: -17.5em;
+		//left: 48%;
+		//margin-left: -17.5em;
 		padding: $size-padding-lr;
 		position: absolute;
 
@@ -1128,6 +1129,31 @@ button,
 
 		.button {
 			min-width: 12em;
+		}
+
+		.goto-next {
+			@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+			background-color: _palette(border-bg);
+			background-image: url('images/arrow.svg');
+			background-position: center center;
+			background-repeat: no-repeat;
+			border-radius: 100%;
+			border: 0;
+			bottom: 3em;
+			display: block;
+			height: 4em;
+			left: 50%;
+			line-height: 4em;
+			margin-left: -2em;
+			overflow: hidden;
+			position: absolute;
+			text-indent: 4em;
+			white-space: nowrap;
+			width: 4em;
+
+			&:hover {
+				background-color: _palette(border2-bg);
+			}
 		}
 	}
 }
@@ -1471,9 +1497,12 @@ button,
 }
 
 .input {
+	i {
+		color: #e0b5b5;
+	}
 	width: 25px;
 	height: 25px;
-	background-color: #2C3E50;
+	background-color: #e0b5b5;
 	position: relative;
 	border-radius: 50%;
 }
@@ -1487,38 +1516,37 @@ button,
 	z-index: -1;
 	top: 50%;
 	transform: translateY(-50%);
-	background-color: #2C3E50;
+	background-color: #e0b5b5;
 	width: 4vw;
 	height: 5px;
 	max-width: 50px;
 }
 .input::before {
-	left: calc(-4vw + 12.5px);
+	left: calc(-5vw + 12.5px);
 }
 .input::after {
 	right: calc(-4vw + 12.5px);
 }
 .input.active {
-	background-color: #2C3E50;
-}
-.input.active::before {
-	background-color: #2C3E50;
-}
-.input.active::after {
-	background-color: #AEB6BF;
+	i {
+		font-size: 3em;
+		color: #E04545;
+	}
+	background-color: #E04545;
 }
 .input.active span {
 	font-weight: 700;
 }
 .input.active span::before {
-	font-size: 13px;
+	font-size: 17px;
 }
 .input.active span::after {
 	font-size: 15px;
 }
-.input.active ~ .input, .input.active ~ .input::before, .input.active ~ .input::after {
-	background-color: #AEB6BF;
+.input {
+	background-color: transparent !important;
 }
+
 .input span {
 	width: 1px;
 	height: 1px;
@@ -1552,7 +1580,7 @@ button,
 	width: inherit;
 	font-weight: 400;
 	font-size: 22px;
-	margin-top: 100px;
+	margin-top: 40px;
 }
 .description-flex-container p {
 	margin-top: 0;
@@ -1564,11 +1592,11 @@ button,
 
 @media (min-width: 1250px) {
 	.input::before {
-		left: -37.5px;
+		left: -36px;
 	}
 
 	.input::after {
-		right: -37.5px;
+		right: -52px;
 	}
 }
 @media (max-width: 850px) {
@@ -1596,7 +1624,7 @@ button,
 		justify-content: center;
 		width: 100%;
 		height: auto;
-		margin-top: 15vh;
+		//margin-top: 15vh;
 	}
 
 	.input {
