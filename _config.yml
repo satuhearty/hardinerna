@@ -3,7 +3,7 @@ title: Hardin & Erna
 email: wedding@satuhearty.com
 description: We are getting married! 31.08.2018
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" #"https://satuhearty.github.io/hardinerna" # the base hostname & protocol for your site
+url: "https://satuhearty.github.io/hardinerna" # the base hostname & protocol for your site
 
 # Social settings
 500px_url:
@@ -15,7 +15,7 @@ instagram_url:
 linkedin_url:
 pinterest_url:
 slack_url:
-twitter_url: 
+twitter_url:
 
 # Build settings
 markdown: kramdown
