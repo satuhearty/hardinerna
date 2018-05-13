@@ -4,7 +4,7 @@ import Notifications, {notify} from 'react-notify-toast';
 import axios from 'axios';
 
 const MODAL_TIMEOUT = 3000;
-const RSVP_CODE = 'shafeeqnadia';
+const RSVP_CODE = 'hardinerna';
 
 class Rsvp extends Component {
   state = {
@@ -17,7 +17,7 @@ class Rsvp extends Component {
     extraGuests: [],
     rsvpAttending: false,
     open: false,
-    showForm: true,
+    showForm: false,
     formSubmitted: false,
     attendingArray: [],
   };
@@ -26,6 +26,26 @@ class Rsvp extends Component {
     e.preventDefault();
     e.stopPropagation();
     const {name, invite, rsvpAttending, arrivalDate, origin, attending, extraGuests} = this.state;
+
+    if (name === '') {
+      this.createNotification('Please enter your name.', 'error');
+      return;
+    } else if (invite === '') {
+      this.createNotification('Please select your invitation.', 'error');
+      return;
+    } else if (rsvpAttending) {
+      if (origin === '') {
+        this.createNotification('Please tell us where you are coming from.', 'error');
+        return;
+      } else if (attending === 0) {
+        this.createNotification('Please enter the number of pax.', 'error');
+        return;
+      } else if (attending > 1 && extraGuests.length !== attending - 1) {
+        this.createNotification('Please enter guest names.', 'error');
+        return;
+      }
+    }
+
     const guest = {name, invite, rsvpAttending, arrivalDate, origin, attending, extraGuests};
     this.props.firebase.database().ref('rsvp').push(guest);
     axios.post('https://formspree.io/nikamirulmukmeen@gmail.com', guest);

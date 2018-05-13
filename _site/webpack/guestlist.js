@@ -57,6 +57,33 @@ class App extends Component {
     });
   };
 
+  getInviteDisplay = (props) => {
+    return props.value.charAt(0).toUpperCase() + props.value.slice(1);
+  };
+
+  getInviteFilters = (filter, onChange) => {
+    return (
+      <select
+        onChange={e => onChange(e.target.value)}
+        style={{width: '100%'}}
+        value={filter ? filter.value : 'all'}
+      >
+        <option value="all">All</option>
+        <option value="hardin">Hardin</option>
+        <option value="erna">Erna</option>
+        <option value="both">Both</option>
+      </select>
+    );
+  };
+
+  filterInvite = (filter, row) => {
+    if (filter.value === 'all') {
+      return true;
+    } else {
+      return filter.value === String(row[filter.id]);
+    }
+  };
+
   getRsvpDisplay = (props) => {
     return props.value
       ? <i className="fa fa-check" aria-hidden="true" style={{color: 'green'}} />
@@ -101,7 +128,10 @@ class App extends Component {
       },
       {
         Header: 'Invite',
-        accessor: 'invite'
+        accessor: 'invite',
+        Cell: props => this.getInviteDisplay(props),
+        Filter: ({ filter, onChange }) => this.getInviteFilters(filter, onChange),
+        filterMethod: (filter, row) => this.filterInvite(filter, row)
       },
       {
         Header: 'Attending',

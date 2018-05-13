@@ -5,8 +5,9 @@
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
-@import url('font-awesome.min.css');
+@import url("https://fonts.googleapis.com/css?family=Great+Vibes");
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,400italic,700,800");
+@import url('font-awesome.min.css');
 
 @import "libs/skel";
 
@@ -1067,6 +1068,11 @@ button,
 
 /* Header */
 
+.header-special {
+	font-family: _font(family-header);
+	text-transform: none;
+}
+
 #header {
 	height: 100vh;
 	position: relative;
@@ -1133,7 +1139,7 @@ button,
 
 		.goto-next {
 			@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
-			background-color: _palette(border-bg);
+			background-color: rgba(255, 255, 255, 0.8);
 			background-image: url('images/arrow.svg');
 			background-position: center center;
 			background-repeat: no-repeat;
@@ -1264,7 +1270,6 @@ button,
 		}
 
 		.container {
-			margin-left: -40%;
 			padding: $size-padding-lr;
 		}
 	}
@@ -1475,6 +1480,10 @@ button,
 	}
 }
 
+.address {
+	color: _palette(fg);
+}
+
 .flex-parent {
 	margin-top: 4em;
 	display: flex;
@@ -1579,7 +1588,7 @@ button,
 .description-flex-container {
 	width: inherit;
 	font-weight: 400;
-	font-size: 22px;
+	font-size: 20px;
 	margin-top: 40px;
 }
 .description-flex-container p {
@@ -2131,4 +2140,21 @@ button,
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none
+}
+
+.google-maps {
+	position: relative;
+	padding-bottom: 75%; // This is the aspect ratio
+	margin: 2em;
+	height: 0;
+	overflow: hidden;
+	//-webkit-filter: grayscale(100%);
+	//filter: grayscale(100%);
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100% !important;
+		height: 100% !important;
+	}
 }
