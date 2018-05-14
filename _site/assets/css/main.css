@@ -2830,3 +2830,15 @@ button,
     left: 0;
     width: 100% !important;
     height: 100% !important; }
+
+.slick-slider {
+  margin-bottom: 3em !important; }
+
+.slick-dots li {
+  width: 1em !important; }
+  .slick-dots li button {
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important; }
+    .slick-dots li button:before {
+      font-size: 10px !important; }
