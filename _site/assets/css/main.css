@@ -1020,13 +1020,13 @@ html.is-loading body *, html.is-loading body *:before, html.is-loading body *:af
   -ms-transition: none !important;
   transition: none !important; }
 html.is-touch {
-  height: 80vh;
+  height: 100vh;
   overflow: hidden; }
   html.is-touch #wrapper {
     -webkit-backface-visibility: hidden;
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translate3d(0, 0, 0);
-    height: 80vh;
+    height: 100vh;
     overflow: auto; }
 
 body, input, select, textarea {
