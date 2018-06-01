@@ -67678,12 +67678,12 @@ class Rsvp extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',
                     { value: 'bride' },
-                    'Bride - Erna Ghazali'
+                    'Bride - Erna Rahman'
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',
                     { value: 'groom' },
-                    'Groom - Hardin Mohammad'
+                    'Groom - Hardin Ghazali'
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',

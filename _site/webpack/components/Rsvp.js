@@ -180,8 +180,8 @@ class Rsvp extends Component {
                   <div className="select-wrapper">
                     <select name="invite" id="invite" onChange={this.updateInvite}>
                       <option value="">Invitation? *</option>
-                      <option value="bride">Bride - Erna Ghazali</option>
-                      <option value="groom">Groom - Hardin Mohammad</option>
+                      <option value="bride">Bride - Erna Rahman</option>
+                      <option value="groom">Groom - Hardin Ghazali</option>
                       <option value="both">Both Bride & Groom</option>
                     </select>
                   </div>
