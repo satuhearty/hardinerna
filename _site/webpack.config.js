@@ -6,16 +6,16 @@ module.exports = {
     'rsvp': './webpack/rsvp.js',
     'guestlist': './webpack/guestlist.js'
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new UglifyJSPlugin({
-      sourceMap: true
-    })
-  ],
+  // plugins: [
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       'NODE_ENV': JSON.stringify('production')
+  //     }
+  //   }),
+  //   new UglifyJSPlugin({
+  //     sourceMap: true
+  //   })
+  // ],
   output: {
     path: __dirname + '/assets/js/',
     filename: '[name].js'

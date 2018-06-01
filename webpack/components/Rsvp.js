@@ -4,7 +4,9 @@ import Notifications, {notify} from 'react-notify-toast';
 import axios from 'axios';
 
 const MODAL_TIMEOUT = 3000;
-const RSVP_CODE = 'hardinerna';
+const RSVP_CODE_SINGLE = 'S0109';
+const RSVP_CODE_PLUS_ONE = 'P0109';
+const RSVP_CODE_FAMILY = 'F0109';
 
 class Rsvp extends Component {
   state = {
@@ -18,14 +20,17 @@ class Rsvp extends Component {
     rsvpAttending: false,
     open: false,
     showForm: false,
+    showSingle: false,
+    showPlusOne: false,
+    showFamily: false,
     formSubmitted: false,
-    attendingArray: [],
+    attendingArray: []
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const {name, invite, rsvpAttending, arrivalDate, origin, attending, extraGuests} = this.state;
+    const {code, name, invite, rsvpAttending, arrivalDate, origin, attending, extraGuests} = this.state;
 
     if (name === '') {
       this.createNotification('Please enter your name.', 'error');
@@ -46,7 +51,7 @@ class Rsvp extends Component {
       }
     }
 
-    const guest = {name, invite, rsvpAttending, arrivalDate, origin, attending, extraGuests};
+    const guest = {code, name, invite, rsvpAttending, arrivalDate, origin, attending, extraGuests};
     this.props.firebase.database().ref('rsvp').push(guest);
     axios.post('https://formspree.io/nikamirulmukmeen@gmail.com', guest);
     this.onOpenModal();
@@ -59,9 +64,15 @@ class Rsvp extends Component {
   handleCodeSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (this.state.code === RSVP_CODE) {
+    if (this.state.code === RSVP_CODE_SINGLE) {
       this.createNotification('Success!', 'success');
-      this.setState({ showForm: true });
+      this.setState({ showForm: true, showSingle: true });
+    } else if (this.state.code === RSVP_CODE_PLUS_ONE) {
+      this.createNotification('Success!', 'success');
+      this.setState({ showForm: true, showPlusOne: true });
+    } else if (this.state.code === RSVP_CODE_FAMILY) {
+      this.createNotification('Success!', 'success');
+      this.setState({ showForm: true, showFamily: true });
     } else {
       this.createNotification('Incorrect RSVP Code.', 'error');
     }
@@ -92,6 +103,14 @@ class Rsvp extends Component {
 
   updateRsvp = () => {
     this.setState({ rsvpAttending: !this.state.rsvpAttending });
+    if (this.state.code === RSVP_CODE_SINGLE) {
+      this.setState({ attending: 1 });
+    } else if (this.state.code === RSVP_CODE_PLUS_ONE) {
+      this.setState({
+        attending: 2,
+        attendingArray: Array(1).fill(1)
+      });
+    }
   };
 
   updateOrigin = (e) => {
@@ -118,7 +137,9 @@ class Rsvp extends Component {
   };
 
   render() {
-    const { open, attending, attendingArray, showForm, formSubmitted, rsvpAttending } = this.state;
+    const {
+      open, attending, attendingArray, showForm, showSingle, showPlusOne, showFamily, formSubmitted, rsvpAttending
+    } = this.state;
 
     return (
       <div>
@@ -191,23 +212,30 @@ class Rsvp extends Component {
                 {rsvpAttending &&
                   <div className="12u$">
                     <div className="select-wrapper">
-                      <select name="attending" id="attending" onChange={this.updateAttending}>
-                        <option value=""># of pax</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                      </select>
+                      {showSingle &&
+                        <select name="attending" id="attending" disabled={true} onChange={this.updateAttending}>
+                          <option value="1">1 attending</option>
+                        </select>
+                      }
+                      {showPlusOne &&
+                        <select name="attending" id="attending" disabled={true} onChange={this.updateAttending}>
+                          <option value="2">2 attending</option>
+                        </select>
+                      }
+                      {showFamily &&
+                        <select name="attending" id="attending" onChange={this.updateAttending}>
+                          <option value=""># of pax</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      }
                     </div>
                   </div>
                 }
-                {attendingArray.map((x, i) => {
+                {rsvpAttending && attendingArray.map((x, i) => {
                   return (
                     <div className="12u$" key={i}>
                       <input

@@ -6,6 +6,9 @@ import ReactTable from 'react-table';
 import Modal from 'react-responsive-modal';
 
 const MIN_WIDTH_FOR_RSVP_DETAILS = 50;
+const RSVP_CODE_SINGLE = 'S0109';
+const RSVP_CODE_PLUS_ONE = 'P0109';
+const RSVP_CODE_FAMILY = 'F0109';
 
 class App extends Component {
   constructor() {
@@ -41,9 +44,12 @@ class App extends Component {
     firebase.database().ref('rsvp').on('value', snapshot => {
       const guestList = [];
       const guests = snapshot.val();
+      let index = 0;
       Object.keys(guests).forEach((key) => {
         const guest = guests[key];
         guestList.push({
+          'index': ++index,
+          'code': guest.code,
           'name': guest.name,
           'invite': guest.invite,
           'rsvpAttending': guest.rsvpAttending,
@@ -55,6 +61,40 @@ class App extends Component {
       });
       this.setState({ data: guestList });
     });
+  };
+
+  getCodeDisplay = (props) => {
+    switch (props.value) {
+      case RSVP_CODE_PLUS_ONE:
+        return 'Plus 1';
+      case RSVP_CODE_FAMILY:
+        return 'Family';
+      default:
+        return 'Single';
+    }
+  };
+
+  getCodeFilters = (filter, onChange) => {
+    return (
+      <select
+        onChange={e => onChange(e.target.value)}
+        style={{width: '100%'}}
+        value={filter ? filter.value : 'all'}
+      >
+        <option value="all">All</option>
+        <option value={RSVP_CODE_SINGLE}>Single</option>
+        <option value={RSVP_CODE_PLUS_ONE}>Plus 1</option>
+        <option value={RSVP_CODE_FAMILY}>Family</option>
+      </select>
+    );
+  };
+
+  filterCode = (filter, row) => {
+    if (filter.value === 'all') {
+      return true;
+    } else {
+      return filter.value === String(row[filter.id]);
+    }
   };
 
   getInviteDisplay = (props) => {
@@ -69,8 +109,8 @@ class App extends Component {
         value={filter ? filter.value : 'all'}
       >
         <option value="all">All</option>
-        <option value="hardin">Hardin</option>
-        <option value="erna">Erna</option>
+        <option value="groom">Groom</option>
+        <option value="bride">Bride</option>
         <option value="both">Both</option>
       </select>
     );
@@ -122,6 +162,17 @@ class App extends Component {
     });
 
     const columns = [
+      {
+        Header: 'No.',
+        accessor: 'index'
+      },
+      {
+        Header: 'RSVP',
+        accessor: 'code',
+        Cell: props => this.getCodeDisplay(props),
+        Filter: ({ filter, onChange }) => this.getCodeFilters(filter, onChange),
+        filterMethod: (filter, row) => this.filterCode(filter, row)
+      },
       {
         Header: 'First Name',
         accessor: 'name'
