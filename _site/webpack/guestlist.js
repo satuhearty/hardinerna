@@ -174,7 +174,7 @@ class App extends Component {
         filterMethod: (filter, row) => this.filterCode(filter, row)
       },
       {
-        Header: 'First Name',
+        Header: 'Name',
         accessor: 'name'
       },
       {
