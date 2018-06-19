@@ -105,11 +105,6 @@ class Rsvp extends Component {
     this.setState({ rsvpAttending: !this.state.rsvpAttending });
     if (this.state.code === RSVP_CODE_SINGLE) {
       this.setState({ attending: 1 });
-    } else if (this.state.code === RSVP_CODE_PLUS_ONE) {
-      this.setState({
-        attending: 2,
-        attendingArray: Array(1).fill(1)
-      });
     }
   };
 
@@ -218,8 +213,10 @@ class Rsvp extends Component {
                         </select>
                       }
                       {showPlusOne &&
-                        <select name="attending" id="attending" disabled={true} onChange={this.updateAttending}>
-                          <option value="2">2 attending</option>
+                        <select name="attending" id="attending" onChange={this.updateAttending}>
+                          <option value=""># of pax</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
                         </select>
                       }
                       {showFamily &&
