@@ -5,7 +5,7 @@
   "main": "rsvp.js",
   "scripts": {
     "start": "webpack-dev-server --devtool eval-source-map --history-api-fallback --open",
-    "build": "webpack -p"
+    "build": "webpack -w"
   },
   "repository": {
     "type": "git",

@@ -19,11 +19,13 @@ class App extends Component {
   state = {
     data: [],
     open: false,
-    currentData: {}
+    currentData: {},
+    headCount: 0
   };
 
   componentDidMount() {
     this.getGuestList();
+    this.setHeadCount();
   }
 
   onOpenModal = () => {
@@ -32,6 +34,14 @@ class App extends Component {
 
   onCloseModal = () => {
     this.setState({ open: false });
+  };
+
+  setHeadCount = () => {
+    let headCount = 0;
+    this.reactTable.getResolvedState().sortedData.forEach(guest => {
+      headCount += parseInt(guest.attending);
+    });
+    this.setState({ headCount });
   };
 
   getGuestRsvpData = (rsvp) => {
@@ -45,6 +55,7 @@ class App extends Component {
       const guestList = [];
       const guests = snapshot.val();
       let index = 0;
+      let headCount = 0;
       Object.keys(guests).forEach((key) => {
         const guest = guests[key];
         guestList.push({
@@ -58,8 +69,9 @@ class App extends Component {
           'attending': guest.attending,
           'extraGuests': guest.extraGuests
         });
+        headCount += parseInt(guest.attending);
       });
-      this.setState({ data: guestList });
+      this.setState({ data: guestList, headCount  });
     });
   };
 
@@ -153,13 +165,7 @@ class App extends Component {
   };
 
   render() {
-    const { data, currentData } = this.state;
-
-    let headCount = 0;
-
-    data.forEach(guest => {
-      headCount += parseInt(guest.attending);
-    });
+    const { data, currentData, headCount } = this.state;
 
     const columns = [
       {
@@ -217,6 +223,8 @@ class App extends Component {
           data={data}
           filterable
           defaultFilterMethod={(filter, row) => String(row[filter.id]).toLowerCase().indexOf(String(filter.value).toLowerCase()) !== -1}
+          ref={(r) => { this.reactTable = r; }}
+          onFilteredChange={this.setHeadCount}
           getTdProps={(state, rowInfo) => {
             return {
               onClick: (e, handleOriginal) => {

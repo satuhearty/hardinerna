@@ -18,5 +18,23 @@ pinterest_url:
 slack_url:
 twitter_url:
 
+sass:
+  sass_dir: _sass
+  style: compressed
+
 # Build settings
 markdown: kramdown
+
+# Gems
+gems:
+  - jekyll-mentions
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-paginate
+
+jekyll-mentions:
+    base_url: https://github.com
+
+# Exclude list
+exclude: [README.md, Gemfile, Gemfile.lock, node_modules, webpack, gulpfile.js, package.json, _site, src, vendor, CNAME, LICENSE, Rakefile, old]
