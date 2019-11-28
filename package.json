@@ -44,7 +44,7 @@
     "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.1",
     "bricks.js": "^1.8.0",
     "compression-webpack-plugin": "^1.1.2",
     "css-loader": "^0.28.7",
